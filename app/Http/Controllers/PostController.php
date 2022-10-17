@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\post;
 use App\Models\category;
+use Egulias\EmailValidator\Warning\Comment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PostController extends Controller
 {
@@ -26,8 +28,8 @@ class PostController extends Controller
      */
     public function create()
     {
-        $category_id=category::get();
-        return view('backend.post.create',compact('category_id'));
+        $category_data=DB::table('categories')->get();
+        return view('backend.post.create',compact('category_data'));
     }
 
     /**
@@ -39,7 +41,6 @@ class PostController extends Controller
     public function store(Request $request)
     {
         $post=new post;
-        $post->user_id=$request->user_id;
         $post->cat_id=$request->cat_id;
         $post->title=$request->title;
         $post->title_discription=$request->title_discription;
@@ -73,8 +74,12 @@ class PostController extends Controller
      */
     public function show(post $post,$id)
     {
-        $post= post::find($id);
-        return view('backend.post.show',['postData'=>$post]);
+        $post= DB::table('posts')
+                ->join('categories','categories.id','posts.cat_id')
+                ->select('posts.*','categories.title as ctitle')
+                ->where('posts.id',$id)->first();
+        $Comments= DB::table('comments')->where('post_id',$id)->get();
+        return view('backend.post.show',compact('post','Comments'));
     }
 
     /**
@@ -86,8 +91,9 @@ class PostController extends Controller
     public function edit(post $post,$id)
     {
         $post=post::find($id);
+        $yourCategory=category::where('id',$post->cat_id)->first();
         $category_id=category::get();
-        return view('backend.post.edit',compact('post','category_id'));
+        return view('backend.post.edit',compact('post','category_id','yourCategory'));
     }
 
     /**
@@ -100,7 +106,6 @@ class PostController extends Controller
     public function update(Request $request, post $post)
     {
         $post = post::find($request->id);
-        $post->user_id=$request->user_id;
         $post->cat_id=$request->cat_id;
         $post->title=$request->title;
         $post->title_discription=$request->title_discription;

@@ -10,10 +10,10 @@
             @csrf
             <div class="form-group">
                 <label>Title</label>
-                <input type="text" class="form-control" name="title" id="" required placeholder="Enter Title">
+                <input type="text" class="form-control" name="title" placeholder="Enter Title" required>
             </div>
             <div class="form-group">
-                <label>Details</label>
+                <label>Details Blog</label>
                 <textarea class="form-control" id="" name="details" rows="3" required></textarea>
             </div>
             <div class="form-group">
@@ -21,7 +21,6 @@
                 <input type="file" class="form-control" name="image" id="" required>
             </div>
             <button type="submit" class="btn btn-primary">Save category</button>
-
             <a href="/category/index" class="btn btn-secondary">Back</a>
         </form>
     </div>

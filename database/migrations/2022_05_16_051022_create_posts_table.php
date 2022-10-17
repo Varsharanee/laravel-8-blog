@@ -15,7 +15,6 @@ class CreatePostsTable extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
-            $table->Integer("user_id");
             $table->Integer("cat_id");
             $table->String("title");
             $table->String("title_discription");
@@ -23,7 +22,6 @@ class CreatePostsTable extends Migration
             $table->String("full_image");
             $table->text("detail");
             $table->String("tags");
-
             $table->timestamps();
         });
     }

@@ -45,7 +45,6 @@ Route::get('/post/destroy/{id}',[PostController::class,'destroy']);
 //All route for Comment table
 Route::get('/comment/index',[CommentController::class,'index']);
 Route::get('/comment/show/{id}',[CommentController::class,'show']);
-Route::get('/comment/destroy/{id}',[CommentController::class,'destroy']);
 
 //All route for setting
 Route::get('/admin/setting',[SettingController::class,'index']);

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\post;
 use App\Models\comment;
+use Illuminate\Support\Facades\Auth;
 
 class homeController extends Controller
 {
@@ -29,7 +30,7 @@ class homeController extends Controller
             'comment'=>'required'
         ]);
         $data=new comment;
-        $data->user_id=$request->user()->id;
+        $data->user_id=Auth::id();
         $data->post_id=$id;
         $data->comment=$request->comment;
         $data->save();

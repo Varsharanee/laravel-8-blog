@@ -94,7 +94,7 @@ class CategoryController extends Controller
            $category->image = $filename;
         }
        $category->save();
-       return redirect('/category/index');
+       return redirect('/category/index')->with('msg','Category Update Successfully');
     }
 
     /**
