@@ -21,7 +21,7 @@
                 <img class="card-img-top" src="{{asset('uploads/thumbnail_image/'.$post->thumbnail)}}" alt="Card image cap">
                 <div class="card-body">
                     <h5 class="card-title">{{$post->title}}</h5>
-                    <p class="card-text">{{$post->title_discription}}</p>
+                    <p class="card-text">{{Illuminate\Support\Str::of($post->title_discription)->limit(50)}}</p>
                 </div>
                 <p class="m-2">Read More...</p>
             </div>

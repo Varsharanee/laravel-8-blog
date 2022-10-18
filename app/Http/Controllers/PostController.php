@@ -17,8 +17,9 @@ class PostController extends Controller
      */
     public function index()
     {
-        $post = post::all();
-        return view('backend.post.index',compact('post'));
+        $post = post::where('status',0)->get();
+        $trash = post::where('status',1)->get();
+        return view('backend.post.index',compact('post','trash'));
     }
 
     /**
@@ -128,7 +129,7 @@ class PostController extends Controller
         $post->detail=$request->detail;
         $post->tags=$request->tags;
         $post->save();
-       return redirect('/post/index');
+       return redirect('/post/index')->with('msg','Post Update Successfully');
     }
 
     /**
@@ -137,10 +138,15 @@ class PostController extends Controller
      * @param  \App\Models\post  $post
      * @return \Illuminate\Http\Response
      */
-    public function destroy(post $post,$id)
-    {
-        $post= post::find($id);
-        $post->delete();
-        return redirect('/post/index');
+    
+    public function status($status,$id){
+        $post=post::find($id);
+        $post->status=$status;
+        $post->save();
+        if ($status == 0) {
+            return redirect()->back()->with("msg", "Customer restored successfully.");
+        } else {
+            return redirect()->back()->with("msg", "Customer added to trash successfully.");
+        }
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\category;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -14,9 +15,10 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $category = category::all();
-        return view('backend.category.index',compact('category'));
-    }
+        $category = category::where('status',0)->get();
+        $trash = category::where('status',1)->get();
+        return view('backend.category.index',compact('category','trash'));
+    } 
 
     /**
      * Show the form for creating a new resource.
@@ -103,10 +105,15 @@ class CategoryController extends Controller
      * @param  \App\Models\category  $category
      * @return \Illuminate\Http\Response
      */
-    public function destroy(category $category,$id)
-    {
-        $category= category::find($id);
-        $category->delete();
-        return redirect('/category/index');
+
+    public function status($status,$id){
+        $category=category::find($id);
+        $category->status=$status;
+        $category->save();
+        if ($status == 0) {
+            return redirect()->back()->with("msg", "Customer restored successfully.");
+        } else {
+            return redirect()->back()->with("msg", "Customer added to trash successfully.");
+        }
     }
 }

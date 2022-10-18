@@ -32,6 +32,7 @@ Route::get('/category/show/{id}',[CategoryController::class,'show']);
 Route::get('/category/edit/{id}',[CategoryController::class,'edit']);
 Route::post('/category/update',[CategoryController::class,'update']);
 Route::get('/category/destroy/{id}',[CategoryController::class,'destroy']);
+Route::get('/category/status/{status}/{id}',[CategoryController::class,'status']);
 
 //All route for Post table
 Route::get('/post/index',[PostController::class,'index']);
@@ -41,6 +42,7 @@ Route::get('/post/show/{id}',[PostController::class,'show']);
 Route::get('/post/edit/{id}',[PostController::class,'edit']);
 Route::post('/post/update',[PostController::class,'update']);
 Route::get('/post/destroy/{id}',[PostController::class,'destroy']);
+Route::get('/post/status/{status}/{id}',[PostController::class,'status']);
 
 //All route for Comment table
 Route::get('/comment/index',[CommentController::class,'index']);

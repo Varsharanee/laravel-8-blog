@@ -21,7 +21,13 @@ class homeController extends Controller
     }
     //Post Details
     public function post($slug, $id){
+        // To count page views
+        post::find($id)->increment('views');
         $detail_post=post::find($id);
+        // Another method to count page views
+        // $detail_post->views=$detail_post->views +1;
+        // $detail_post->save();
+        // return $detail_post;
         return view('frontend.post',compact('detail_post'));
     }
     //save comment

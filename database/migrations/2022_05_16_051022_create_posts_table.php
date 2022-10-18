@@ -22,6 +22,8 @@ class CreatePostsTable extends Migration
             $table->String("full_image");
             $table->text("detail");
             $table->String("tags");
+            $table->Integer("status");
+            $table->Integer("views");
             $table->timestamps();
         });
     }

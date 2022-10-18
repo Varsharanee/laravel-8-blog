@@ -42,6 +42,10 @@
                 <td>{{$post->detail}}</td>
             </tr>
             <tr>
+                <th>Views: </th>
+                <td>{{$post->views}}</td>
+            </tr>
+            <tr>
                 <th>Tags: </th>
                 <td>{{$post->tags}}</td>
             </tr>

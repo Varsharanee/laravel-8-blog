@@ -44,8 +44,36 @@
                                 class="fa-solid fa-eye"></i></i></a></i>
                     </td>
                     <td>
-                        <a href="/category/destroy/{{$items[ 'id']}}" class="btn btn-danger"><i
+                        <a href="/category/status/1/{{$items ->id}}" class="btn btn-danger"><i
                                 class="fa-solid fa-trash-can"></i></i></a></i>
+                    </td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table><br><br><br>
+        <div class="container text-center my-2">
+            <h3><b>Trash Data</b></h3>
+        </div><br>
+        <table class="table m-3">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Restore</th>
+                    <th scope="col">Image</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($trash as $items)
+                <tr>
+                    <td>{{$items->id}}</td>
+                    <td>{{$items->title}}</td>
+                    <td>
+                        <img height="60px" width="70px" src="{{asset('uploads/category_image/'.$items->image)}}"
+                            alt="{{$items->image}}">
+                    </td>
+                    <td>
+                        <a href="/category/status/0/{{$items ->id}}" class="badge bg-success"> Restore</a>
                     </td>
                 </tr>
                 @endforeach
